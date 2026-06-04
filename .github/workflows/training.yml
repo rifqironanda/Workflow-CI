@@ -47,7 +47,6 @@ jobs:
         with:
           name: trained-model
           path: MLProject/saved_model
-
       - name: Copy Model
         run: |
           cp MLProject/saved_model/model.pkl serving/model.pkl
