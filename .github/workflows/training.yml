@@ -51,7 +51,7 @@ jobs:
       - name: Copy Model
         run: |
           cp MLProject/saved_model/model.pkl serving/model.pkl
-
+      
       - name: Build Docker Image
         run: |
           docker build \
