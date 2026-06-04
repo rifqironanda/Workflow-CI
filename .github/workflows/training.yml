@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -25,15 +24,11 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Dependencies
         run: |
-          pip install mlflow
-          pip install pandas
-          pip install numpy
-          pip install scikit-learn
-          pip install joblib
+          pip install mlflow pandas numpy scikit-learn joblib
 
       - name: Run MLflow Project
         env:
@@ -41,6 +36,14 @@ jobs:
         run: |
           cd MLProject
           mlflow run . --env-manager local
+
+      - name: Check Generated Model
+        run: |
+          echo "=== Saved Model ==="
+          ls -lah MLProject/saved_model || true
+
+          echo "=== Find model.pkl ==="
+          find . -name "model.pkl"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -51,7 +54,12 @@ jobs:
       - name: Copy Model
         run: |
           cp MLProject/saved_model/model.pkl serving/model.pkl
-      
+
+      - name: Verify Serving Folder
+        run: |
+          echo "=== Serving Folder ==="
+          ls -lah serving
+
       - name: Build Docker Image
         run: |
           docker build \
@@ -61,9 +69,9 @@ jobs:
       - name: Tag Docker Image
         run: |
           docker tag telco-churn-model \
-          ${{ secrets.DOCKER_USERNAME }}/telco-churn-model:latest
+            ${{ secrets.DOCKER_USERNAME }}/telco-churn-model:latest
 
       - name: Push Docker Image
         run: |
           docker push \
-          ${{ secrets.DOCKER_USERNAME }}/telco-churn-model:latest
+            ${{ secrets.DOCKER_USERNAME }}/telco-churn-model:latest
