@@ -47,11 +47,16 @@ jobs:
         with:
           name: trained-model
           path: MLProject/saved_model
-      - name: Build Docker Image
+
+      - name: Copy Model
         run: |
-          mlflow models build-docker \
-            -m MLProject/saved_model/mlflow_model \
-            -n telco-churn-model
+          cp MLProject/saved_model/model.pkl serving/model.pkl
+
+        - name: Build Docker Image
+          run: |
+            docker build \
+              -t telco-churn-model \
+              ./serving
 
       - name: Tag Docker Image
         run: |
