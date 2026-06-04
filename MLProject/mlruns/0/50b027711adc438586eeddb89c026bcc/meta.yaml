@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/skripsi/Dicoding/workflow/Workflow-CI/MLProject/mlruns/0/50b027711adc438586eeddb89c026bcc/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 50b027711adc438586eeddb89c026bcc
+run_name: secretive-ox-134
+run_uuid: 50b027711adc438586eeddb89c026bcc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780565842385
+status: 1
+tags: []
+user_id: rifqi

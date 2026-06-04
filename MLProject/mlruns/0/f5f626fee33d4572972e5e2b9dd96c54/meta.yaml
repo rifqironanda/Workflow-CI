@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/skripsi/Dicoding/workflow/Workflow-CI/MLProject/mlruns/0/f5f626fee33d4572972e5e2b9dd96c54/artifacts
+end_time: 1780566247230
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f5f626fee33d4572972e5e2b9dd96c54
+run_name: masked-eel-368
+run_uuid: f5f626fee33d4572972e5e2b9dd96c54
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780566228142
+status: 3
+tags: []
+user_id: rifqi

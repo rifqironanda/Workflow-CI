@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/skripsi/Dicoding/workflow/Workflow-CI/MLProject/mlruns/0/aae7d149f4d44a719c29eb8222ce135c/artifacts
+end_time: 1780566246657
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: aae7d149f4d44a719c29eb8222ce135c
+run_name: beautiful-roo-938
+run_uuid: aae7d149f4d44a719c29eb8222ce135c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780566242334
+status: 3
+tags: []
+user_id: rifqi
