@@ -1,5 +1,6 @@
 import pandas as pd
 import mlflow
+import shutil
 import os
 import joblib
 import mlflow.sklearn
@@ -41,9 +42,14 @@ os.makedirs("saved_model", exist_ok=True)
 joblib.dump(model, "saved_model/model.pkl")
 
 # Simpan model MLflow
+model_path = "saved_model/mlflow_model"
+
+if os.path.exists(model_path):
+    shutil.rmtree(model_path)
+
 mlflow.sklearn.save_model(
     sk_model=model,
-    path="saved_model/mlflow_model"
+    path=model_path
 )
 
 print("Training selesai.")
