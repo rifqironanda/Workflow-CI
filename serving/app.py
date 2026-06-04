@@ -27,13 +27,11 @@ TOTAL_ERRORS = Counter(
     "Total prediction errors"
 )
 
-# Histogram
 PREDICTION_LATENCY = Histogram(
     "ml_prediction_latency_seconds",
     "Prediction latency"
 )
 
-# Gauge Metrics
 CPU_USAGE = Gauge(
     "ml_cpu_usage_percent",
     "CPU usage percentage"
@@ -70,55 +68,43 @@ MODEL_STATUS.set(1)
 
 @app.post("/predict")
 def predict(data: dict):
-
     TOTAL_REQUESTS.inc()
-
     start = time.time()
-
     try:
         df = pd.DataFrame([data])
-
         pred = model.predict(df)
-
         TOTAL_PREDICTIONS.inc()
-
         PREDICTION_LATENCY.observe(
             time.time() - start
         )
-
         return {
             "prediction": int(pred[0])
         }
 
-    except Exception:
-
+    except Exception as e:
         TOTAL_ERRORS.inc()
-
+        return {
+            "error": str(e)
+        }
         raise
 
 @app.get("/metrics")
 def metrics():
-
     CPU_USAGE.set(
         psutil.cpu_percent()
     )
-
     MEMORY_USAGE.set(
         psutil.virtual_memory().percent
     )
-
     DISK_USAGE.set(
         psutil.disk_usage("/").percent
     )
-
     ACTIVE_PROCESSES.set(
         len(psutil.pids())
     )
-
     SYSTEM_UPTIME.set(
         time.time() - BOOT_TIME
     )
-
     return Response(
         generate_latest(),
         media_type="text/plain"
